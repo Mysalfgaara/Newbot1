@@ -11,7 +11,7 @@ class Config(object):
     SUPPORT_CHAT = "https://t.me/+d6RkmIpwxE9hNGY1"
     UPDATE_CHAT = "https://t.me/+d6RkmIpwxE9hNGY1"
     BOT_USERNAME = "Flame_waifu_bot"
-    CHARA_CHANNEL_ID = "-1002023474262"
+    CHARA_CHANNEL_ID = "-1002675991751"
     api_id = "20457610"
     api_hash = "b7de0dfecd19375d3f84dbedaeb92537"
 
