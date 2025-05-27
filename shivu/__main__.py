@@ -180,7 +180,7 @@ async def send_image(update: Update, context: CallbackContext) -> None:
             "💮 Special Edition": 0.1,
             "💎 Premium": 0.1,
             "🔮 Limited Edition": 10,
-            ❄️ Winter": 0.1,
+            "❄️ Winter": 0.1,
             "🏖 Summer": 0.1
         }
     else:
@@ -193,7 +193,7 @@ async def send_image(update: Update, context: CallbackContext) -> None:
             "💮 Special Edition": 0,
             "💎 Premium": 0,
             "🔮 Limited Edition": 1,
-            ❄️ Winter": 0,
+            "❄️ Winter": 0,
             "🏖 Summer": 0
         }
 
