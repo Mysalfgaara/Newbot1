@@ -165,11 +165,11 @@ async def daily_reward(_, message):
     user_last_command_times[user_id] = current_time
     print(f"Debug: User's first name is '{first_name}', last name is '{last_name}'")  # Debug statement
     # Check for specific tags in both first name and last name
-    if "बदमोस" not in first_name and "बदमोस" not in last_name:
-        await message.reply_text("Plz set `बदमोस` in your first or last name to use this command.")
+    if "𝐅ʟᴀᴍᴇ" not in first_name and "𝐅ʟᴀᴍᴇ" not in last_name:
+        await message.reply_text("Plz set `𝐅ʟᴀᴍᴇ` in your first or last name to use this command.")
         return
     if "𝘿𝙍𝘼𝙂𝙊𝙉𝙎⃟🐉" in first_name or "𝘿𝙍𝘼𝙂𝙊𝙉𝙎⃟🐉" in last_name:
-        await message.reply_text("Plz remove other tags `𝘿𝙍𝘼𝙂𝙊𝙉𝙎⃟🐉` and only use `बदमोस` in your first or last name to use this command.")
+        await message.reply_text("Plz remove other tags `𝘿𝙍𝘼𝙂𝙊𝙉𝙎⃟🐉` and only use `𝐅ʟᴀᴍᴇ` in your first or last name to use this command.")
         return
     user_data = await user_collection.find_one({'id': user_id}, projection={'last_tesure_reward': 1, 'balance': 1})
     if not user_data:
@@ -260,7 +260,7 @@ application.add_handler(CommandHandler("addt", add_tokens, block=False))
 application.add_handler(CommandHandler("delt", delete_tokens, block=False))
 
 async def reset_tokens(update, context):
-    owner_id = 7011990425  # Replace with the actual owner's user ID
+    owner_id = 7639271205  # Replace with the actual owner's user ID
     # Check if the user invoking the command is the owner
     if update.effective_user.id != owner_id:
         await update.message.reply_text("You don't have permission to perform this action.")
