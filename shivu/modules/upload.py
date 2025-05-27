@@ -8,8 +8,7 @@ from shivu import application, collection, db, CHARA_CHANNEL_ID, SUPPORT_CHAT
 WRONG_FORMAT_TEXT = """Wrong ❌️ format...  eg. /upload Img_url muzan-kibutsuji Demon-slayer 3
 img_url character-name anime-name rarity-number
 use rarity number accordingly rarity Map
-rarity_map =  1: ⚪️ Common, 2: 🟣 Rare, 3: 🟡 Legendary, 4: 🟢 Medium, 5: 🎐 Celestial, 6: 💮 Special Edition, 7: 💎 Premium, 8: 🔮 Limited Edition 9: ❄️ Winter, 10: 🏖 Summer"""
-
+rarity_map =  1: ⚪️ Common, 2: 🟣 Rare, 3: 🟢 Medium, 4: 🟡 Legendary, 5: 🎐 Celestial, 6: 💮 Special Edition, 7: 💎 Premium, 8: 🔮 Limited Edition, 9: ❄️ Winter, 10: 🏖 Summer"""
 async def get_next_sequence_number(sequence_name):
     sequence_collection = db.sequences
     sequence_document = await sequence_collection.find_one_and_update(
@@ -50,9 +49,9 @@ async def upload(update: Update, context: CallbackContext) -> None:
         return
 
     rarity_map = {
-        1: "🔵 𝙇𝙊𝙒", 2: "🟢 𝙈𝙀𝘿𝙄𝙐𝙈", 3: "🔴 𝙃𝙄𝙂𝙃", 4: "🟡 𝙉𝙊𝘽𝙀𝙇",
-        5: "🥵 𝙉𝙐𝘿𝙀𝙎", 6: "🔮 𝙇𝙄𝙈𝙄𝙏𝙀𝘿", 7: "💋 𝘾𝙊𝙎𝙋𝙇𝘼𝙔 [𝙇]",
-        8: "⚫️ [𝙓] 𝙑𝙚𝙧𝙨𝙚", 9: "🎭 𝙀𝙍𝙊𝙏𝙄𝘾", 10: "🍑 𝙎𝙪𝙡𝙩𝙧𝙮"
+        1: "⚪️ Common", 2: "🟣 Rare", 3: "🟢 Medium", 4: "🟡 Legendary",
+        5: "🎐 Celestial", 6: "💮 Special Edition", 7: "💎 Premium",
+        8: "🔮 Limited Edition", 9: "❄️ Winter", 10: "🏖 Summer"
     }
 
     try:
