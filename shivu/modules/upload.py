@@ -136,9 +136,9 @@ async def update(update: Update, context: CallbackContext) -> None:
         new_value = new_value.replace('-', ' ').title()
     elif field == 'rarity':
         rarity_map = {
-            1: "🔵 𝙇𝙊𝙒", 2: "🟢 𝙈𝙀𝘿𝙄𝙐𝙈", 3: "🔴 𝙃𝙄𝙂𝙃", 4: "🟡 𝙉𝙊𝘽𝙀𝙇",
-            5: "🥵 𝙉𝙐𝘿𝙀𝙎", 6: "🔮 𝙇𝙄𝙈𝙄𝙏𝙀𝘿", 7: "💋 𝘾𝙊𝙎𝙋𝙇𝘼𝙔 [𝙇]",
-            8: "⚫️ [𝙓] 𝙑𝙚𝙧𝙨𝙚", 9: "🎭 𝙀𝙍𝙊𝙏𝙄𝘾", 10: "🍑 𝙎𝙪𝙡𝙩𝙧𝙮"
+            1: "⚪️ Common", 2: "🟣 Rare", 3: "🟢 Medium", 4: "🟡 Legendary",
+            5: "🎐 Celestial", 6: "💮 Special Edition", 7: "💎 Premium",
+            8: "🔮 Limited Edition", 9: "❄️ Winter", 10: "🏖 Summer"
         }
         try:
             new_value = rarity_map[int(new_value)]
