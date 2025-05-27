@@ -96,29 +96,29 @@ async def set_rarity_percentages(chat_id, percentages):
 
 
 rarity_active = {
-    "🔵 𝙇𝙊𝙒": True,
-    "🟢 𝙈𝙀𝘿𝙄𝙐𝙈": True,
-    "🔴 𝙃𝙄𝙂𝙃": True,
-    "🟡 𝙉𝙊𝘽𝙀𝙇": True,
-    "🥵 𝙉𝙐𝘿𝙀𝙎": True,
-    "🔮 𝙇𝙄𝙈𝙄𝙏𝙀𝘿": True,
-    "💋 𝘾𝙊𝙎𝙋𝙇𝘼𝙔 [𝙇]": True,
-    "⚫️ [𝙓] 𝙑𝙚𝙧𝙨𝙚": True,
-    "🎭 𝙀𝙍𝙊𝙏𝙄𝘾": True,
-    "🍑 𝙎𝙪𝙡𝙩𝙧𝙮": True
+    "⚪️ Common": True,
+    "🟣 Rare": True,
+    "🟢 Medium": True,
+    "🟡 Legendary": True,
+    "🎐 Celestial": True,
+    "💮 Special Edition": True,
+    "💎 Premium": True,
+    "🔮 Limited Edition": True,
+    "❄️ Winter": True,
+    "🏖 Summer": True
 }
 # Map numbers to rarity strings
 rarity_map = {
-    1: "🔵 𝙇𝙊𝙒",
-    2: "🟢 𝙈𝙀𝘿𝙄𝙐𝙈",
-    3: "🔴 𝙃𝙄𝙂𝙃",
-    4: "🟡 𝙉𝙊𝘽𝙀𝙇",
-    5: "🥵 𝙉𝙐𝘿𝙀𝙎",
-    6: "🔮 𝙇𝙄𝙈𝙄𝙏𝙀𝘿",
-    7: "💋 𝘾𝙊𝙎𝙋𝙇𝘼𝙔 [𝙇]",
-    8: "⚫️ [𝙓] 𝙑𝙚𝙧𝙨𝙚",
-    9: "🎭 𝙀𝙍𝙊𝙏𝙄𝘾",
-    10: "🍑 𝙎𝙪𝙡𝙩𝙧𝙮"
+    1: "⚪️ Common",
+    2: "🟣 Rare",
+    3: "🟢 Medium",
+    4: "🟡 Legendary",
+    5: "🎐 Celestial",
+    6: "💮 Special Edition",
+    7: "💎 Premium",
+    8: "🔮 Limited Edition",
+    9: "❄️ Winter",
+    10: "🏖 Summer"
 }
 # Command to turn a rarity on
 async def set_on(update: Update, context: CallbackContext) -> None:
@@ -172,7 +172,7 @@ async def send_image(update: Update, context: CallbackContext) -> None:
     # Set rarity percentages based on chat ID
     if chat_id == -1002041586214:
         rarity_percentages = {
-            "🔵 𝙇𝙊𝙒": 50,
+            "⚪️ Common": 50,
             "🟢 𝙈𝙀𝘿𝙄𝙐𝙈": 40,
             "🔴 𝙃𝙄𝙂𝙃": 30,
             "🟡 𝙉𝙊𝘽𝙀𝙇": 40,
