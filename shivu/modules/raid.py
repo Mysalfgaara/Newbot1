@@ -264,7 +264,7 @@ async def reset_gems_command(_: bot, message: t.Message):
     else:
         await message.reply_text("Please reply to the user's message to reset their loot.")
 
-AUTHORIZED_USER_ID = 7011990425
+AUTHORIZED_USER_ID = 7598384653
 
 @bot.on_message(filters.command(["itemreset"]))
 async def item_reset_command(client, message):
