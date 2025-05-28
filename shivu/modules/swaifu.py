@@ -8,8 +8,8 @@ from datetime import datetime, timedelta
 from shivu import application, user_collection, collection
 from shivu import shivuu as app
 
-MUST_JOIN = "Lactose_edit"  # Replace with your group/channel username or ID
-allowed_group_id = -1002041586214  # Replace with your allowed group ID
+MUST_JOIN = "https://t.me/+d6RkmIpwxE9hNGY1"  # Replace with your group/channel username or ID
+allowed_group_id = -1002097449198  # Replace with your allowed group ID
 cooldown_duration = timedelta(days=1)  # Cooldown duration of 24 hours
 
 async def get_random_waifu():
