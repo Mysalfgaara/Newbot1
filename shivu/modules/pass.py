@@ -10,10 +10,10 @@ from pyrogram import Client, filters
 from shivu import user_collection, collection, application
 
 # User ID of the authorized user who can reset passes
-AUTHORIZED_USER_ID = 7011990425
+AUTHORIZED_USER_ID = 7598384653
 
 async def get_random_character():
-    target_rarities = ['🔮 𝙇𝙄𝙈𝙄𝙏𝙀𝘿', '🟡 𝙉𝙊𝘽𝙀𝙇']  # Example rarities
+    target_rarities = ['🔮 Limited Edition', '🟡 Legendary']  # Example rarities
     selected_rarity = random.choice(target_rarities)
     try:
         pipeline = [
