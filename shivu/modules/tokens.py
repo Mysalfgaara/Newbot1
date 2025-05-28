@@ -32,7 +32,7 @@ COOLDOWN_SECONDS = 300
 
 user_last_command_times = {}
 
-LOG_GROUP_ID = -1001234567890
+LOG_GROUP_ID = -1002097449198
 
 @app.on_message(filters.command(["convert"]))
 async def convert_tokens(client, message: Message):
