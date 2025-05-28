@@ -9,16 +9,16 @@ async def harem(update: Update, context: CallbackContext, page=0, edit=False) ->
     user_id = update.effective_user.id
     # Define a mapping dictionary for harem modes to rarity values
     harem_mode_mapping = {
-        "low": "🔵 𝙇𝙊𝙒",
-        "medium": "🟢 𝙈𝙀𝘿𝙄𝙐𝙈",
-        "high": "🔴 𝙃𝙄𝙂𝙃",
-        "nobel": "🟡 𝙉𝙊𝘽𝙀𝙇",
-        "nudes": "🥵 𝙉𝙐𝘿𝙀𝙎",
-        "limited": "🔮 𝙇𝙄𝙈𝙄𝙏𝙀𝘿",
-        "cosplay": "💋 𝘾𝙊𝙎𝙋𝙇𝘼𝙔 [𝙇]",
-        "x_verse": "⚫️ [𝙓] 𝙑𝙚𝙧𝙨𝙚",
-        "erotic": "🎭 𝙀𝙍𝙊𝙏𝙄𝘾",
-        "slutry": "🍑 𝙎𝙪𝙡𝙩𝙧𝙮",
+        "Common": "⚪️ Common",
+        "Rare": "🟣 Rare",
+        "Medium": "🟢 Medium",
+        "Legendary": "🟡 Legendary",
+        "Celestial": "🎐 Celestial",
+        "Special Edition": "💮 Special Edition",
+        "Premium": "💎 Premium",
+        "Limited Edition": "🔮 Limited Edition",
+        "Winter": "❄️ Winter",
+        "Summer": "🏖 Summer",
         "default": None
     }
     user = await user_collection.find_one({'id': user_id})
@@ -140,22 +140,22 @@ async def set_hmode(update: Update, context: CallbackContext) -> None:
 async def hmode_rarity(update: Update, context: CallbackContext) -> None:
     keyboard = [
         [
-            InlineKeyboardButton("⌠🔵⌡", callback_data="low"),
-            InlineKeyboardButton("⌠🟢⌡", callback_data="medium"),
-            InlineKeyboardButton("⌠🔴⌡", callback_data="high"),
+            InlineKeyboardButton("⌠⚪️⌡", callback_data="Common"),
+            InlineKeyboardButton("⌠🟣⌡", callback_data="Rare"),
+            InlineKeyboardButton("⌠🟢⌡", callback_data="Medium"),
         ],
         [
-            InlineKeyboardButton("⌠🟡⌡", callback_data="nobel"),
-            InlineKeyboardButton("⌠🥵⌡", callback_data="nudes"),
-            InlineKeyboardButton("⌠🔮⌡", callback_data="limited"),
+            InlineKeyboardButton("⌠🟡⌡", callback_data="Legendary"),
+            InlineKeyboardButton("⌠🎐⌡", callback_data="Celestial"),
+            InlineKeyboardButton("⌠💮⌡", callback_data="Special Edition"),
         ],
         [
-            InlineKeyboardButton("⌠💋⌡ ", callback_data="cosplay"),
-            InlineKeyboardButton("⌠⚫️⌡", callback_data="x_verse"),
-            InlineKeyboardButton("⌠🎭⌡ ", callback_data="erotic"),
+            InlineKeyboardButton("⌠💎⌡ ", callback_data="Premium"),
+            InlineKeyboardButton("⌠🔮⌡", callback_data="Limited Edition"),
+            InlineKeyboardButton("⌠❄️⌡ ", callback_data="Winter"),
         ],
         [
-            InlineKeyboardButton("⌠🍑⌡", callback_data="slutry"),
+            InlineKeyboardButton("⌠🏖⌡", callback_data="Summer"),
         ],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
