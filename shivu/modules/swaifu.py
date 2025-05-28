@@ -13,7 +13,7 @@ allowed_group_id = -1002041586214  # Replace with your allowed group ID
 cooldown_duration = timedelta(days=1)  # Cooldown duration of 24 hours
 
 async def get_random_waifu():
-    target_rarities = ['🔵 𝙇𝙊𝙒', '🟢 𝙈𝙀𝘿𝙄𝙐𝙈', '🔴 𝙃𝙄𝙂𝙃', '🟡 𝙉𝙊𝘽𝙀𝙇']
+    target_rarities = ['⚪️ Common', '🟣 Rare', '🟢 Medium', '🟡 Legendary']
     selected_rarity = random.choice(target_rarities)
     try:
         pipeline = [
