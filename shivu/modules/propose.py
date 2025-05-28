@@ -14,7 +14,7 @@ user_cooldowns = {}  # Dictionary to track user cooldowns
 user_last_command_times = {}  # Dictionary to track user last command times
 
 MUST_JOIN = 'LustxUpdate'
-OWNER_ID = 7011990425  # Replace with the actual owner ID
+OWNER_ID = 7639271205  # Replace with the actual owner ID
 
 start_messages = [
     "✨ Finally the time has come ✨",
@@ -38,7 +38,7 @@ rejection_images = [
 ]
 
 async def get_random_characters():
-    target_rarities = ['🟡 𝙉𝙊𝘽𝙀𝙇', '🥵 𝙉𝙐𝘿𝙀𝙎']  # Example rarities
+    target_rarities = ['🟡 Legendary', '💮 Special Edition']  # Example rarities
     selected_rarity = random.choice(target_rarities)
     try:
         pipeline = [
