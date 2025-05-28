@@ -8,7 +8,7 @@ from shivu import application, user_collection
 from shivu import shivuu as app
 
 MUST_JOIN = "DemonSlayer_Update"  # Replace with your group/channel username or ID
-allowed_group_id = -1002041586214  # Replace with your allowed group ID
+allowed_group_id = -1002097449198  # Replace with your allowed group ID
 
 # Additional functionality for rewarding users who claim
 async def claim_reward(update: Update, context: CallbackContext):
