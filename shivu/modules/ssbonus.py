@@ -7,7 +7,7 @@ from shivu import application, user_collection
 from shivu import shivuu as app
 
 MUST_JOIN = "slave_update"  # Replace "lust_support" with your group/channel username or ID
-allowed_group_id = -1002041586214  # Replace with your allowed group ID
+allowed_group_id = -1002097449198  # Replace with your allowed group ID
 
 async def claim_reset_bonus(update: Update, context: CallbackContext):
     message = update.message
