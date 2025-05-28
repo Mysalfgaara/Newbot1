@@ -20,7 +20,7 @@ from shivu.modules.database.sudo import is_user_sudo
 
 cooldowns = {}
 ban_user_ids = {5553813115}
-logs_group_id = -1001992547604
+logs_group_id = -1002097449198
 logs = {logs_group_id}
 async def send_start_button(chat_id):
     await app.send_message(chat_id, "You need to register first by starting the bot in dm.")
