@@ -15,7 +15,7 @@ user_cooldowns = {}  # Dictionary to track user cooldowns
 ban_user_ids = {1234567890}
 
 async def get_random_characters():
-    target_rarities = ['🟡 𝙉𝙊𝘽𝙀𝙇']  # Example rarities
+    target_rarities = ['🟡 Legendary']  # Example rarities
     selected_rarity = random.choice(target_rarities)
     try:
         pipeline = [
