@@ -12,16 +12,16 @@ from shivu import user_collection, collection, application
 
 # Define rarity percentages
 rarity_percentages = {
-    "🔵 𝙇𝙊𝙒": 30,
-    "🟢 𝙈𝙀𝘋𝙄𝙐𝙈": 30,
-    "🔴 𝙃𝙄𝙂𝙃": 30,
-    "🟡 𝙉𝙊𝘽𝙀𝙇": 10,
-    "🥵 𝙉𝙐𝘿𝙀𝙎": 0,
-    "🔮 𝙇𝙄𝙈𝙄𝙏𝙀𝘿": 0,
-    "💋 𝘾𝙊𝙎𝙋𝙇𝘼𝙔 [𝙇]": 0,
-    "⚫️ [𝙓] 𝙑𝙚𝙧𝙨𝙚": 1,
-    "🎭 𝙀𝙍𝙊𝙏𝙄𝘾": 0,
-    "🍑 𝙎𝙪𝙡𝙩𝙧𝙮": 0
+    "⚪️ Common": 30,
+    "🟢🟣 Rare": 30,
+    "🟢 Medium": 30,
+    "🟡 Legendary": 10,
+    "🎐 Celestial": 0,
+    "💮 Special Edition": 0,
+    "💎 Premium [𝙇]": 0,
+    "🔮 Limited Edition": 1,
+    "❄️ Winter": 0,
+    "🏖 Summer": 0
 }
 
 async def get_random_waifu(multiplier):
