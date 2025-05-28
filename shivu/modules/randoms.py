@@ -3,20 +3,20 @@ from random import choices
 from shivu import application, user_collection, collection
 
 # Replace OWNER_ID with the actual owner's user ID
-OWNER_ID = 7011990425
+OWNER_ID = 7639271205
 
 # Rarity percentages
 rarity_percentages = {
-    "🔵 𝙇𝙊𝙒": 0,
-    "🟢 𝙈𝙀𝘿𝙄𝙐𝙈": 0,
-    "🔴 𝙃𝙄𝙂𝙃": 0,
-    "🟡 𝙉𝙊𝘽𝙀𝙇": 0,
-    "🥵 𝙉𝙐𝘿𝙀𝙎": 100,
-    "🔮 𝙇𝙄𝙈𝙄𝙏𝙀𝘿": 0,
-    "💋 𝘾𝙊𝙎𝙋𝙇𝘼𝙔 [𝙇]": 0,
-    "⚫️ [𝙓] 𝙑𝙚𝙧𝙨𝙚": 0,
-    "🎭 𝙀𝙍𝙊𝙏𝙄𝘾": 0,
-    "🍑 𝙎𝙪𝙡𝙩𝙧𝙮": 0
+    "⚪️ Common": 0,
+    "🟣 Rare": 0,
+    "🟢 Medium": 0,
+    "🟡 Legendary": 0,
+    "🎐 Celestial": 100,
+    "💮 Special Edition": 0,
+    "💎 Premium": 0,
+    "🔮 Limited Edition": 0,
+    "❄️ Winter": 0,
+    "🏖 Summer": 0
 }
 
 async def giverandom(update, context):
