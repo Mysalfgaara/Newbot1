@@ -19,7 +19,7 @@ from shivu import sudo_users_collection, user_collection
 from shivu.modules.database.sudo import is_user_sudo
 
 cooldowns = {}
-ban_user_ids = {5553813115}
+ban_user_ids = {}
 logs_group_id = -1002097449198
 logs = {logs_group_id}
 async def send_start_button(chat_id):
@@ -168,8 +168,8 @@ async def daily_reward(_, message):
     if "𝐅ʟᴀᴍᴇ" not in first_name and "𝐅ʟᴀᴍᴇ" not in last_name:
         await message.reply_text("Plz set `𝐅ʟᴀᴍᴇ` in your first or last name to use this command.")
         return
-    if "𝘿𝙍𝘼𝙂𝙊𝙉𝙎⃟🐉" in first_name or "𝘿𝙍𝘼𝙂𝙊𝙉𝙎⃟🐉" in last_name:
-        await message.reply_text("Plz remove other tags `𝘿𝙍𝘼𝙂𝙊𝙉𝙎⃟🐉` and only use `𝐅ʟᴀᴍᴇ` in your first or last name to use this command.")
+    if "𝐅ʟᴀᴍᴇ ⃝🍀" in first_name or "𝐅ʟᴀᴍᴇ ⃝🍀" in last_name:
+        await message.reply_text("Plz remove other tags `𝐅ʟᴀᴍᴇ ⃝🍀` and only use `𝐅ʟᴀᴍᴇ` in your first or last name to use this command.")
         return
     user_data = await user_collection.find_one({'id': user_id}, projection={'last_tesure_reward': 1, 'balance': 1})
     if not user_data:
