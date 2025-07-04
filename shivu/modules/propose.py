@@ -1,6 +1,6 @@
 from pyrogram import filters, Client, types as t
 from shivu import shivuu as bot
-from shivu import user_collection, collection
+from shivu import user_collection, collectio
 import asyncio
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 from pyrogram.errors import UserNotParticipant, ChatWriteForbidden
@@ -14,7 +14,7 @@ user_cooldowns = {}  # Dictionary to track user cooldowns
 user_last_command_times = {}  # Dictionary to track user last command times
 
 MUST_JOIN = 'LustxUpdate'
-OWNER_ID = 7639271205  # Replace with the actual owner ID
+OWNER_ID = 7598384653  # Replace with the actual owner ID
 
 start_messages = [
     "✨ Finally the time has come ✨",
@@ -54,7 +54,7 @@ async def get_random_characters():
 
 async def log_interaction(user_id):
     # Log user interaction to a specific group
-    group_id = -1002057572762  # Set your group ID here
+    group_id = -1002097449198  # Set your group ID here
     await bot.send_message(group_id, f"User {user_id} has interacted with the propose command at {time.strftime('%Y-%m-%d %H:%M:%S')}")
 
 @bot.on_message(filters.command(["cd"]))
@@ -103,7 +103,7 @@ async def propose_command(_: bot, message: t.Message):
             pass
 
     # Check if the command is used in the allowed group
-    allowed_group_id = -1002041586214  # Replace with your allowed group ID
+    allowed_group_id = -1002097449198  # Replace with your allowed group ID
     if chat_id != allowed_group_id:
         return await message.reply_text("This is an exclusive command that only works in @lustsupport")
 
