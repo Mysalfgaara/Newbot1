@@ -1,28 +1,30 @@
-from pyrogram import filters, Client, types as t
+from pyrogram import filters
 from shivu import shivuu as bot
-from shivu import user_collection, collectio
+from shivu import user_collection, collection
 import asyncio
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
-from pyrogram.errors import UserNotParticipant, ChatWriteForbidden
-from datetime import datetime, timedelta
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.errors import UserNotParticipant
 import random
 import time
 
-win_rate_percentage = 5 # Set the win rate percentage here
-fight_fee = 200000  # Set the fee for the propose command
-user_cooldowns = {}  # Dictionary to track user cooldowns
-user_last_command_times = {}  # Dictionary to track user last command times
+# Configurations
+win_rate_percentage = 5  # Success chance in %
+fight_fee = 20000  # Token fee for proposing
+user_cooldowns = {}
+user_last_command_times = {}
 
-MUST_JOIN = 'LustxUpdate'
-OWNER_ID = 7598384653  # Replace with the actual owner ID
+MUST_JOIN = 'https://t.me/+QJ7LM4ePd3NiNzNl'
+OWNER_ID = 7598384653
+ALLOWED_GROUP_ID = -1002097449198
 
+# Messages & Images
 start_messages = [
     "✨ Finally the time has come ✨",
     "💫 The moment you've been waiting for 💫",
     "🌟 The stars align for this proposal 🌟"
 ]
 rejection_captions = [
-    "She slapped you and ran away😂",
+    "She slapped you and ran away 😂",
     "She rejected you outright! 😂",
     "You got a harsh 'NO!' 😂"
 ]
@@ -37,134 +39,123 @@ rejection_images = [
     "https://te.legra.ph/file/81d011398da3a6f49fa7f.png"
 ]
 
+# ----------------------
+# Fetch Random Characters
+# ----------------------
 async def get_random_characters():
-    target_rarities = ['🟡 Legendary', '💮 Special Edition']  # Example rarities
+    target_rarities = ['🟡 Legendary', '🎐 Special']
     selected_rarity = random.choice(target_rarities)
     try:
         pipeline = [
             {'$match': {'rarity': selected_rarity}},
-            {'$sample': {'size': 1}}  # Adjust Num
+            {'$sample': {'size': 1}}
         ]
         cursor = collection.aggregate(pipeline)
         characters = await cursor.to_list(length=None)
         return characters
     except Exception as e:
-        print(e)
+        print("DB Error:", e)
         return []
 
+# ----------------------
+# Log Interaction
+# ----------------------
 async def log_interaction(user_id):
-    # Log user interaction to a specific group
-    group_id = -1002097449198  # Set your group ID here
-    await bot.send_message(group_id, f"User {user_id} has interacted with the propose command at {time.strftime('%Y-%m-%d %H:%M:%S')}")
+    group_id = ALLOWED_GROUP_ID
+    await bot.send_message(group_id, f"User {user_id} used /propose at {time.strftime('%Y-%m-%d %H:%M:%S')}")
 
-@bot.on_message(filters.command(["cd"]))
-async def reset_cooldown_command(_: bot, message: t.Message):
+# ----------------------
+# Reset Cooldown (Admin)
+# ----------------------
+@bot.on_message(filters.command("cd"))
+async def reset_cooldown_command(_, message):
     if message.from_user.id != OWNER_ID:
-        return await message.reply_text("You do not have permission to use this command.")
-    
+        return await message.reply_text("You don't have permission.")
     if not message.reply_to_message:
-        return await message.reply_text("You must reply to a user's message to reset their cooldown.")
-    
+        return await message.reply_text("Reply to a user to reset cooldown.")
     target_user_id = message.reply_to_message.from_user.id
-    if target_user_id in user_cooldowns:
-        user_cooldowns[target_user_id] = 0
-        await message.reply_text(f"Cooldown for user {target_user_id} has been reset.")
-    else:
-        await message.reply_text("The user has no active cooldown.")
+    user_cooldowns[target_user_id] = 0
+    await message.reply_text(f"Cooldown reset for user {target_user_id}.")
 
-@bot.on_message(filters.command(["propose"]))
-async def propose_command(_: bot, message: t.Message):
+# ----------------------
+# Main Propose Command
+# ----------------------
+@bot.on_message(filters.command("propose"))
+async def propose_command(_, message):
     chat_id = message.chat.id
     user_id = message.from_user.id
+    current_time = time.time()
 
-    # Check if the user is a member of the required group/channel
+    # ✅ Check if user joined the required channel
     try:
         await bot.get_chat_member(MUST_JOIN, user_id)
     except UserNotParticipant:
-        if MUST_JOIN.isalpha():
-            link = "https://t.me/" + MUST_JOIN
-        else:
-            chat_info = await bot.get_chat(MUST_JOIN)
-            link = chat_info.invite_link
-        try:
-            await message.reply_text(
-                f"You must join the support group/channel to use this command.",
-                reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton("Join", url=link),
-                        ]
-                    ]
-                ),
-                disable_web_page_preview=True
-            )
-            return
-        except ChatWriteForbidden:
-            pass
+        link = f"https://t.me/{MUST_JOIN}"
+        return await message.reply_text(
+            "You must join our channel to use this command.",
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Join", url=link)]])
+        )
 
-    # Check if the command is used in the allowed group
-    allowed_group_id = -1002097449198  # Replace with your allowed group ID
-    if chat_id != allowed_group_id:
-        return await message.reply_text("This is an exclusive command that only works in @lustsupport")
+    # ✅ Restrict to allowed group
+    if chat_id != ALLOWED_GROUP_ID:
+        return await message.reply_text("This command only works in @lustsupport")
 
-    current_time = time.time()
-    # Check if the user is on cooldown
-    if user_id in user_cooldowns and current_time - user_cooldowns[user_id] < 600:  # Adjust cooldown duration
+    # ✅ Cooldown check (10 min)
+    if user_id in user_cooldowns and current_time - user_cooldowns[user_id] < 600:
         remaining_time = 600 - (current_time - user_cooldowns[user_id])
-        minutes, seconds = divmod(int(remaining_time), 60)
-        return await message.reply_text(f"You are still on cooldown. Please wait for `{minutes}:{seconds}` seconds.")
+        m, s = divmod(int(remaining_time), 60)
+        return await message.reply_text(f"Cooldown active! Wait {m}:{s} minutes.")
 
-    # Check if the user is spamming commands
-    if user_id in user_last_command_times and current_time - user_last_command_times[user_id] < 5:  # Adjust spam threshold
-        return await message.reply_text("You are sending commands too quickly. Please wait for a moment.")
-
-    # Update last command time for user
+    # ✅ Spam check (5 sec)
+    if user_id in user_last_command_times and current_time - user_last_command_times[user_id] < 5:
+        return await message.reply_text("You're too fast! Wait a few seconds.")
     user_last_command_times[user_id] = current_time
 
-    # Deduct the fight fee from the user's balance
-    user_data = await user_collection.find_one({'id': user_id}, projection={'balance': 1})
-    user_balance = user_data.get('balance', 0)
+    # ✅ Check user balance
+    user_data = await user_collection.find_one({'id': user_id}, {'balance': 1})
+    user_balance = user_data.get('balance', 0) if user_data else 0
     if user_balance < fight_fee:
-        return await message.reply_text("You don't have enough tokens to proceed. Need 200,000.")
+        return await message.reply_text("You need at least 200,000 tokens.")
+
+    # ✅ Deduct tokens
     await user_collection.update_one({'id': user_id}, {'$inc': {'balance': -fight_fee}})
 
-    # Update the user's cooldown
+    # ✅ Apply cooldown
     user_cooldowns[user_id] = current_time
 
-    random_characters = await get_random_characters()
-    try:
-        # Log user interaction
-        await log_interaction(user_id)
+    # ✅ Start interaction
+    await log_interaction(user_id)
+    await bot.send_photo(chat_id, photo=random.choice(acceptance_images), caption=random.choice(start_messages))
+    await asyncio.sleep(2)
+    await message.reply_text(random.choice(["Proposing her... 💍", "Getting down on one knee... 💍", "Popping the question... 💍"]))
+    await asyncio.sleep(2)
 
-        # Initial message with an image
-        start_message = random.choice(start_messages)
-        photo_path = random.choice(acceptance_images)
-        start_msg = await bot.send_photo(chat_id, photo=photo_path, caption=start_message)
-
-        roll_text = random.choice(["Proposing her....💍", "Getting down on one knee....💍", "Popping the question....💍"])
-        await message.reply_text(roll_text)
-
-        if random.random() < (win_rate_percentage / 100):
+    # ✅ Success or fail
+    if random.random() < (win_rate_percentage / 100):
+        random_characters = await get_random_characters()
+        if random_characters:
             for character in random_characters:
-                try:
-                    await user_collection.update_one({'id': user_id}, {'$push': {'characters': character}})
-                except Exception as e:
-                    print(e)  # Handle the exception appropriately
-            await asyncio.sleep(2)
-            img_urls = [character['img_url'] for character in random_characters]
-            captions = [
-                f"<b>{character['name']}</b> has accepted your proposal! 😇\n"
-                f"Slave Name: {character['name']}\n"
-                f"Rarity: {character['rarity']}\n"
-                f"Anime: {character['anime']}\n"
-                for character in random_characters
-            ]
-            for img_url, caption in zip(img_urls, captions):
-                await message.reply_photo(photo=img_url, caption=caption)
-        else:
-            await asyncio.sleep(2)
-            rejection_caption = random.choice(rejection_captions)
-            rejection_image = random.choice(rejection_images)
-            await message.reply_photo(photo=rejection_image, caption=rejection_caption)
-    except Exception as e:
-        print(e)
+                await user_collection.update_one({'id': user_id}, {'$push': {'characters': character}})
+                
+                # ✅ Use img_file_id if available, fallback to img_url
+                img = character.get('img_file_id') or character.get('img_url', '')
+                caption = (
+                    f"<b>{character['name']}</b> accepted your proposal! 😇\n"
+                    f"Name: {character['name']}\n"
+                    f"Rarity: {character['rarity']}\n"
+                    f"Anime: {character['anime']}\n"
+                )
+                await message.reply_photo(photo=img, caption=caption,
+                    reply_markup=InlineKeyboardMarkup([
+                        [InlineKeyboardButton("🔥 View Harem", callback_data="view_harem")],
+                        [InlineKeyboardButton("💍 Propose Again", callback_data="propose_again")]
+                    ])
+                )
+    else:
+        await message.reply_photo(
+            photo=random.choice(rejection_images),
+            caption=random.choice(rejection_captions),
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton("💍 Try Again", callback_data="propose_again")]
+            ])
+        )
